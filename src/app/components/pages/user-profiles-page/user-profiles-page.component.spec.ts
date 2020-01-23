@@ -3,8 +3,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { throwError, of } from 'rxjs';
 
-import { UserProfilesPageComponent } from './user-profiles-page.component';
 import { UserService } from 'src/app/services/user.service';
+import { UserProfilesPageComponent } from './user-profiles-page.component';
+import { UserCardComponent } from '../../shared/user-card/user-card.component';
 
 describe('UserProfilesPageComponent', () => {
 	let component: UserProfilesPageComponent;
@@ -16,7 +17,10 @@ describe('UserProfilesPageComponent', () => {
 				HttpClientModule,
 				ReactiveFormsModule
 			],
-			declarations: [UserProfilesPageComponent],
+			declarations: [
+				UserProfilesPageComponent,
+				UserCardComponent
+			],
 			providers: [
 				HttpClient,
 				UserService

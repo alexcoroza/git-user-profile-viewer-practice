@@ -6,11 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserProfilesPageComponent } from './components/pages/user-profiles-page/user-profiles-page.component';
+import { UserCardComponent } from './components/shared/user-card/user-card.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		UserProfilesPageComponent
+		UserProfilesPageComponent,
+		UserCardComponent
 	],
 	imports: [
 		BrowserModule,

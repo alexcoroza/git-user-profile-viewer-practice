@@ -1,0 +1,26 @@
+div.user-card {
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	display: inline-block;
+	border-radius: 5px;
+
+	div.avatar {
+		width: 150px;
+		margin-bottom: 10px;
+
+		img {
+			width: 100%;
+		}
+	}
+
+	div.user-info {
+		text-align: center;
+	}
+}
+
+div.user-card:hover {
+	background-color: #00bed8;
+	cursor: pointer;
+}

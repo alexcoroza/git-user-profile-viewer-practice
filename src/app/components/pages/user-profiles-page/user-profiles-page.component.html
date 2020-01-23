@@ -5,4 +5,8 @@
 	<form [formGroup]="userProfileSearcherForm" (ngSubmit)="searchUsers()">
 		<input type="text" class="search-box" formControlName="username" placeholder="username">
 	</form>
+
+	<div class="user-cards-container">
+		<app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
+	</div>
 </div>

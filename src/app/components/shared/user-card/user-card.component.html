@@ -1,0 +1,13 @@
+<div class="user-card">
+	<div class="avatar">
+		<img [src]="user.avatarUrl" alt="User Avatar">
+	</div>
+
+	<div class="info">
+		<strong>{{ user.name }}</strong>
+		<div>{{ user.login }}</div>
+		<div>{{ user.company }}</div>
+		<div *ngIf="user.followers">{{ user.followers }} follower</div>
+		<div *ngIf="user.publicRepos">{{ user.publicRepos }} public repos</div>
+	</div>
+</div>
