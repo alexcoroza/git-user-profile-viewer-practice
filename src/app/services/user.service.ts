@@ -47,42 +47,52 @@ export class UserService {
 		const mappedUsers = [];
 		
 		result.items.forEach((user) => {
-			mappedUsers.push({
-				login: user.login,
-				id: user.id,
-				nodeId: user.node_id,
-				avatarUrl: user.avatar_url,
-				gravatarId: user.gravatar_id,
-				url: user.url,
-				htmlUrl: user.html_url,
-				followersUrl: user.followers_url,
-				followingUrl: user.following_url,
-				gistsUrl: user.gists_url,
-				starredUrl: user.starred_url,
-				subscriptionsUrl: user.subscriptions_url,
-				organizationsUrl: user.organizations_url,
-				reposUrl: user.repos_url,
-				eventsUrl: user.events_url,
-				receivedEventsUrl: user.received_events_url,
-				type: user.type,
-				siteAdmin: user.site_admin,
-				name: user.name,
-				company: user.company,
-				blog: user.blog,
-				location: user.location,
-				email: user.email,
-				hireable: user.hireable,
-				bio: user.bio,
-				publicRepos: user.public_repos,
-				publicGists: user.public_gists,
-				followers: user.followers,
-				following: user.following,
-				createdAt: new Date(user.created_at),
-				updatedAt: new Date(user.updated_at)
-			});
+			mappedUsers.push(this.mapDataToUser(user));
 		});
 
 		return mappedUsers;
+	}
+
+
+
+	/**
+	 * Map an object into User
+	 * @param data any object
+	 */
+	private mapDataToUser(data) : User {
+		return {
+			login: data.login,
+			id: data.id,
+			nodeId: data.node_id,
+			avatarUrl: data.avatar_url,
+			gravatarId: data.gravatar_id,
+			url: data.url,
+			htmlUrl: data.html_url,
+			followersUrl: data.followers_url,
+			followingUrl: data.following_url,
+			gistsUrl: data.gists_url,
+			starredUrl: data.starred_url,
+			subscriptionsUrl: data.subscriptions_url,
+			organizationsUrl: data.organizations_url,
+			reposUrl: data.repos_url,
+			eventsUrl: data.events_url,
+			receivedEventsUrl: data.received_events_url,
+			type: data.type,
+			siteAdmin: data.site_admin,
+			name: data.name,
+			company: data.company,
+			blog: data.blog,
+			location: data.location,
+			email: data.email,
+			hireable: data.hireable,
+			bio: data.bio,
+			publicRepos: data.public_repos,
+			publicGists: data.public_gists,
+			followers: data.followers,
+			following: data.following,
+			createdAt: new Date(data.created_at),
+			updatedAt: new Date(data.updated_at)
+		};
 	}
 	
 }
