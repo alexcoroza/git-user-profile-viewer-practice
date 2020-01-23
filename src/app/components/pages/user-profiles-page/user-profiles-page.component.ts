@@ -38,7 +38,7 @@ export class UserProfilesPageComponent implements OnInit {
 	}
 
 
-	searchUser() {
+	searchUser() : void {
 		const searchParam = this.userProfileSearcherForm.get('username').value;
 		const subscription = this.userService.searchUser(searchParam)
 		.pipe(
@@ -57,6 +57,26 @@ export class UserProfilesPageComponent implements OnInit {
 		});
 
 		this.subscriptions.push(subscription);
+	}
+
+
+	/**
+	 * Delete a user from this.user via username
+	 * @param username username
+	 */
+	deleteUser(username: string) : void {
+		// add implementation here
+	}
+
+
+	/**
+	 * Check if a User is already existing in this.users.
+	 * Return true if existing, otherwise return false.
+	 * @param user User
+	 */
+	isUserExisting(user: User) : boolean {
+		// all implementation here
+		return true;
 	}
 	
 
