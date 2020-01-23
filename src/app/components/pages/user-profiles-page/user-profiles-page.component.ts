@@ -70,6 +70,15 @@ export class UserProfilesPageComponent implements OnInit {
 
 
 	/**
+	 * Sort this.users by the property name provided.
+	 * @param propertyName User property that will be used to sort the this.users
+	 */
+	sortUsers(propertyName: string) : void {
+		// add implementation here
+	}
+
+
+	/**
 	 * Check if a User is already existing in this.users.
 	 * Return true if existing, otherwise return false.
 	 * @param user User
