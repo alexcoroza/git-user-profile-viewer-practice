@@ -2,7 +2,7 @@
 	<div class="title">Git User Profile Viewer</div>
 	<div class="instructions">Search a git user and hit enter.</div>
 	
-	<form [formGroup]="userProfileSearcherForm" (ngSubmit)="searchUsers()">
+	<form [formGroup]="userProfileSearcherForm" (ngSubmit)="searchUser()">
 		<input type="text" class="search-box" formControlName="username" placeholder="username">
 	</form>
 

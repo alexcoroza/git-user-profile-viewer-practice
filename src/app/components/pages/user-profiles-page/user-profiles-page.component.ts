@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-user-profiles-page',
@@ -37,17 +38,22 @@ export class UserProfilesPageComponent implements OnInit {
 	}
 
 
-	searchUsers() {
+	searchUser() {
 		const searchParam = this.userProfileSearcherForm.get('username').value;
-		const subscription = this.userService.searchUsers(searchParam)
+		const subscription = this.userService.searchUser(searchParam)
 		.pipe(
-			catchError((error) => {
-				alert('There is something wrong during lookup.');
+			catchError((error: HttpErrorResponse) => {
+				if(error.status === 404) {
+					alert('Cannot find git user.');
+				} else {
+					alert('There is something wrong during lookup.');
+				}
+
 				return EMPTY;
 			})
 		)
-		.subscribe((users) => {
-			this.users = users;
+		.subscribe((user) => {
+			this.users.push(user);
 		});
 
 		this.subscriptions.push(subscription);

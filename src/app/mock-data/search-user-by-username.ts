@@ -1,4 +1,4 @@
-export const getUserByIdMockData = {
+export const searchUserByUsernameMockData = {
 	"login": "alexcoroza",
 	"id": 16507120,
 	"node_id": "MDQ6VXNlcjE2NTA3MTIw",

@@ -3,7 +3,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { of, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { searchUsersMockData }  from '../mock-data/search-users';
+import { searchUserByUsernameMockData }  from '../mock-data/search-user-by-username';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -27,31 +27,32 @@ describe('UserService', () => {
 	});
 
 
-	describe('searchUsers', () => {
-		let httpGetSpy;
+	describe('searchUser', () => {
+		let httpGetSpy, alertSpy;
 
 		beforeEach(() => {
-			httpGetSpy = spyOn(TestBed.get(HttpClient), 'get').and.returnValue(of(searchUsersMockData));
+			alertSpy = spyOn(window, 'alert')
+			httpGetSpy = spyOn(TestBed.get(HttpClient), 'get').and.returnValue(of(searchUserByUsernameMockData));
 		});
 
-		it('should return User[] if theres no error', (done) => {
-			service.searchUsers(null)
-			.subscribe((users) => {
-				expect(users).toBeDefined();
+		it('should return User if theres no error', (done) => {
+			service.searchUser(null)
+			.subscribe((user) => {
+				expect(user).toBeDefined();
 				done();
 			});
 		});
 
 		it('should return an Error if theres an error in parsing the result', (done) => {
 			httpGetSpy.and.returnValue(of('some unknown data that cannot be parsed'));
-			service.searchUsers('alex')
+			service.searchUser('alex')
 			.pipe(
 				catchError((error) => {
-					expect(error.message).toEqual('Data parsing error in searchUsers');
-					done();
+					expect(error.message).toEqual('Data parsing error in searchUser');
 					return EMPTY;
 				})
 			).subscribe();
+			done();
 		});
 	});
 	

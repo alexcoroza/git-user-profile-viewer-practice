@@ -38,23 +38,31 @@ describe('UserProfilesPageComponent', () => {
 	});
 
 
-	describe('searchUsers', () => {
+	describe('searchUser', () => {
 		let userServiceSpy;
 
 		beforeEach(() => {
-			userServiceSpy = spyOn(TestBed.get(UserService), 'searchUsers').and.returnValue(of([null, null, null]));
+			userServiceSpy = spyOn(TestBed.get(UserService), 'searchUser').and.returnValue(of(null));
 		});
 		
 		it('should catch any error and show an alert notif to user', () => {
-			let alertSpy = spyOn(window, 'alert')
+			const alertSpy = spyOn(window, 'alert')
 			userServiceSpy.and.returnValue(throwError('not found error'));
-			component.searchUsers();
+			component.searchUser();
 			expect(alertSpy).toHaveBeenCalledWith('There is something wrong during lookup.');
 		});
 
-		it('should set the search result to component.users', () => {
-			component.searchUsers();
-			expect(component.users).toEqual([null, null, null]);
+		it('should show an alert notif to user if the user is not found', () => {
+			const alertSpy = spyOn(window, 'alert')
+			userServiceSpy.and.returnValue(throwError({ status: 404 }));
+			component.searchUser();
+			expect(alertSpy).toHaveBeenCalledWith('Cannot find git user.');
+		});
+
+		it('should push the result to component.users', () => {
+			component.searchUser();
+			component.searchUser();
+			expect(component.users).toEqual([null, null]);
 		});
 	});
 	

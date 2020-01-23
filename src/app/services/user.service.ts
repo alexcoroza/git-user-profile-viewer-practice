@@ -18,19 +18,18 @@ export class UserService {
 
 
 	/**
-	 * Get users from github.
-	 * May return HttpErrorResponse or Error.
+	 * Get a user from github using username.
 	 */
-	searchUsers(username: string) : Observable<User[]> {
-		const url = `${environment.apiUrl}/search/users?q=${username}`;
+	searchUser(username: string) : Observable<User> {
+		const url = `${environment.apiUrl}/users/${username}`;
 		return this.httpClient.get(url)
 		.pipe(
 			switchMap((result) => {
 				try {
 					// map the api result into our own object
-					return of(this.mapResultToUsers(result));
+					return of(this.mapResultToUser(result));
 				} catch(error) {
-					const newError = new Error('Data parsing error in searchUsers');
+					const newError = new Error('Data parsing error in searchUser');
 					return throwError(newError);
 				}
 			})
@@ -40,26 +39,10 @@ export class UserService {
 
 
 	/**
-	 * Map results into our own User object
-	 * @param result Result of searching users from github api
-	 */
-	private mapResultToUsers(result): User[] {
-		const mappedUsers = [];
-		
-		result.items.forEach((user) => {
-			mappedUsers.push(this.mapDataToUser(user));
-		});
-
-		return mappedUsers;
-	}
-
-
-
-	/**
-	 * Map an object into User
+	 * Map searchUser api result into User
 	 * @param data any object
 	 */
-	private mapDataToUser(data) : User {
+	private mapResultToUser(data) : User {
 		return {
 			login: data.login,
 			id: data.id,
