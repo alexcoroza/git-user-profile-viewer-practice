@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ export class UserProfilesPageComponent implements OnInit {
 	users: User[] = [];
 	
 	userProfileSearcherForm = this.formBuilder.group({
-		username: ['']
+		username: ['', [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]]
 	});
 	
 	constructor(
@@ -53,10 +53,17 @@ export class UserProfilesPageComponent implements OnInit {
 			})
 		)
 		.subscribe((user) => {
-			this.users.push(user);
+			this.addNewUser(user);
 		});
 
 		this.subscriptions.push(subscription);
+	}
+
+
+	addNewUser(newUser: User): void {
+		if(this.users.length === 0 || this.isUserExisting(newUser) === false) {
+			this.users.push(newUser);
+		}
 	}
 
 
@@ -84,8 +91,15 @@ export class UserProfilesPageComponent implements OnInit {
 	 * @param user User
 	 */
 	isUserExisting(user: User) : boolean {
-		// all implementation here
-		return true;
+		let existing: boolean = false;
+		
+		this.users.forEach((existingUser: User) => {
+			if(existingUser.id === user.id) {
+				existing = true;
+			}
+		});
+
+		return existing;
 	}
 	
 

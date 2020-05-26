@@ -4,6 +4,7 @@
 	
 	<form [formGroup]="userProfileSearcherForm" (ngSubmit)="searchUser()">
 		<input type="text" class="search-box" formControlName="username" placeholder="username">
+		<button class="btn btn-primary" (click)="searchUser()" [disabled]="userProfileSearcherForm.invalid">Submit</button>
 	</form>
 
 	<div class="user-cards-container">
